@@ -1,7 +1,7 @@
 # project-3-group-9
-# Twin Cities Historical Climate Data
+# Twin Cities Climate Trends
 ## Purpose
-To build an interactive dashboard to explore the Twin Cities Historical Climate Dataset.
+To build an interactive dashboard to explore trends from the Twin Cities Historical Climate Dataset.
 ## Overview
 The following is a to-do list for the requirements for Project 3:
 ### Data and Delivery
