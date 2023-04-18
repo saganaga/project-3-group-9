@@ -1,3 +1,10 @@
+const seasonColors = {
+    "Winter": "blue",
+    "Spring": "green",
+    "Summer": "orange",
+    "Fall": "red"
+};
+
 function optionChanged(selectedOption){
     console.log(selectedOption);
     dataUrl = `/api/v1.0/precipitation/seasonal/${selectedOption}`;
@@ -11,9 +18,12 @@ function drawSeasonlPrecipGraph(season, seasonalPrecipData){
         type: "line",
         x: seasonalPrecipData.map((d) => d.year),
         y: seasonalPrecipData.map((d) => d.precip),
-        // y: sample.otu_ids.slice(0, 10).map((id) => `OTU ${id}`),
         text: seasonalPrecipData.map((d) => `${season} ${d.year}`),
-        // text: sample.otu_labels.slice(0, 10),
+        line: {
+            color: seasonColors[season],
+        }
+    },{
+
     }];
     // var layout = {yaxis: {autorange: 'reversed'}};
     Plotly.newPlot("season", graphConfig);
