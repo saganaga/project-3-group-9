@@ -22,3 +22,4 @@ The following is a to-do list for the requirements for Project 3:
 ![add name of screenshot here](link to png)
 ## Summary
 ## Notes
+DB credentials used by the Flask application must be provided via a Python module called `keys.py`. See app.py for required variable names.
