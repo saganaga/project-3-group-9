@@ -6,14 +6,14 @@ const seasonColors = {
 };
 
 function optionChanged(selectedOption){
-    console.log(selectedOption);
     dataUrl = `/api/v1.0/precipitation/seasonal/${selectedOption}`;
     d3.json(dataUrl).then(function(data){
-        drawSeasonlPrecipGraph(selectedOption, data);
+        drawSeasonalPrecipGraph(selectedOption, data);
     });
 }
 
-function drawSeasonlPrecipGraph(season, seasonalPrecipData){
+// Create a line chart for seasonal precipitation with a dropdown menu to display the 4 seasons.
+function drawSeasonalPrecipGraph(season, seasonalPrecipData){
     var graphConfig = [{
         type: "line",
         x: seasonalPrecipData.map((d) => d.year),
