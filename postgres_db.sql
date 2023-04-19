@@ -41,3 +41,23 @@ FROM (
   WHERE dnr_daily_weather.meas_date BETWEEN '1890-03-01' AND '2019-11-30'
 ) tb
 GROUP BY tb.season_yr, tb.season;
+
+CREATE TABLE snowfall_by_year AS
+SELECT
+  snowfall_yr AS yr,
+  sum(snowfall) AS total_snowfall
+FROM (
+  SELECT
+    CASE
+	  WHEN dnr_daily_weather.mnth BETWEEN 1 AND 6
+      THEN dnr_daily_weather.yr - 1
+      ELSE dnr_daily_weather.yr
+    END AS snowfall_yr,
+    dnr_daily_weather.snowfall
+  FROM dnr_daily_weather
+  WHERE dnr_daily_weather.meas_date BETWEEN '1890-07-01' AND '2019-06-30'
+) tb
+GROUP BY snowfall_yr
+ORDER BY snowfall_yr;
+
+ALTER TABLE snowfall_by_year ADD PRIMARY KEY (yr);

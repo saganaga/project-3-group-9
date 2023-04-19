@@ -34,6 +34,7 @@ Base.prepare(autoload_with=engine)
 
 # Save references to each table
 DailyObs = Base.classes.dnr_daily_weather
+SnowfallByYear = Base.classes.snowfall_by_year
 
 def root_dir():
     return os.path.abspath(os.path.dirname(__file__))
@@ -95,6 +96,24 @@ def maxtemp():
     rs = []
     for t in yt:
         rs.append(dict({'year': t.yr, 'maxTemp': t[1]}))
+
+    return jsonify(rs)
+
+# Endpoint for snowfall
+@app.route("/api/v1.0/snowfall")
+def snowfall():
+    # Create our session (link) from Python to the DB
+    session = Session(engine)
+
+    # SQLalchemy query for snowfall (from a table)
+    ys = session.query(SnowfallByYear.yr, SnowfallByYear.total_snowfall).\
+        order_by(SnowfallByYear.yr).all()
+    session.close()
+
+    """Return a list of all yearly snowfalls"""
+    rs = []
+    for s in ys:
+        rs.append(dict({'year': s.yr, 'snowfall': s.total_snowfall}))
 
     return jsonify(rs)
 

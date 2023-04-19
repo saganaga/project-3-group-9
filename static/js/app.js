@@ -5,6 +5,7 @@ const seasonColors = {
     "Fall": "red"
 };
 tempUrl = `/api/v1.0/maxtemp`;
+snowUrl = `/api/v1.0/snowfall`;
 
 function optionChanged(selectedOption){
     dataUrl = `/api/v1.0/precipitation/seasonal/${selectedOption}`;
@@ -43,10 +44,27 @@ function drawMaxTempGraph(yearlyTempData){
     Plotly.newPlot("maxtemp", graphConfig);
 };
 
+// Create a line chart that displays the total snowfall.
+function drawSnowfallGraph(snowfallByYear){
+    var graphConfig = [{
+        type: "line",
+        x: snowfallByYear.map((d) => d.year),
+        y: snowfallByYear.map((d) => d.snowfall),
+        // text: snowfallByYear.map((d) => `${season} ${d.year}`),
+        line: {
+            color: "blue",
 }
+    }]
+
+    // var layout = {yaxis: {autorange: 'reversed'}};
+    Plotly.newPlot("snowfall", graphConfig);
+};
 
 optionChanged(d3.select("#selSeason").node().value);
 d3.json(tempUrl).then(function(data){
     drawMaxTempGraph(data);
 });
 
+d3.json(snowUrl).then(function(data){
+    drawSnowfallGraph(data);
+});
