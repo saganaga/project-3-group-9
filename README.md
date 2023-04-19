@@ -24,3 +24,4 @@ The following is a to-do list for the requirements for Project 3:
 ## Notes
 Data was obtained from Minneapolis/St. Paul Climate Data - Historical Climate Data Listings: https://www.dnr.state.mn.us/climate/twin_cities/listings.html
 DB credentials used by the Flask application must be provided via a Python module called `keys.py`. See app.py for required variable names.
+JavaScript library used: LinearRegression: https://github.com/thisancog/statistics.js

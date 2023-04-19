@@ -10,12 +10,12 @@ snowUrl = `/api/v1.0/snowfall`;
 function optionChanged(selectedOption){
     dataUrl = `/api/v1.0/precipitation/seasonal/${selectedOption}`;
     d3.json(dataUrl).then(function(data){
-        drawSeasonalPrecipGraph(selectedOption, data);
+        drawSeasonalPrecipGraph(selectedOption, data, true);
     });
-}
+};
 
 // Create a line chart for seasonal precipitation with a dropdown menu to display the 4 seasons.
-function drawSeasonalPrecipGraph(season, seasonalPrecipData){
+function drawSeasonalPrecipGraph(season, seasonalPrecipData, showRegression = false){
     var graphConfig = [{
         type: "line",
         x: seasonalPrecipData.map((d) => d.year),
@@ -24,11 +24,37 @@ function drawSeasonalPrecipGraph(season, seasonalPrecipData){
         line: {
             color: seasonColors[season],
         }
-    },{
-
-    }];
+    }]
+    
+    if (showRegression === true) {
+        //Compute the line regression
+        var statsVars = {
+            year: 'metric',
+            precip: 'metric'
+        };
+        
+        var stats = new Statistics(seasonalPrecipData, statsVars);
+        var regression = stats.linearRegression('year', 'precip');
+        
+        function regressionLine(yr) {
+            return regression.regressionFirst.beta1 + regression.regressionFirst.beta2 * yr;
+        }
+        // Add the regression line to the graph
+        graphConfig.push({
+            // 
+            type: "line",
+            x: [1890,2020],
+            y: [regressionLine(1890), regressionLine(2020)],
+            // text: seasonalPrecipData.map((d) => `${season} ${d.year}`),
+            line: {
+                color: "yellow",
+            }
+        });
+    }
     // var layout = {yaxis: {autorange: 'reversed'}};
     Plotly.newPlot("season", graphConfig);
+};
+
 // Create a line chart that displays the maximum of the maximum temperatures.      
 function drawMaxTempGraph(yearlyTempData){
     var graphConfig = [{
@@ -53,7 +79,7 @@ function drawSnowfallGraph(snowfallByYear){
         // text: snowfallByYear.map((d) => `${season} ${d.year}`),
         line: {
             color: "blue",
-}
+        }
     }]
 
     // var layout = {yaxis: {autorange: 'reversed'}};
