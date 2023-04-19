@@ -6,7 +6,7 @@ import sqlalchemy
 import psycopg2
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
-from sqlalchemy import create_engine, Column, Integer, Numeric, String
+from sqlalchemy import create_engine, Column, Integer, Numeric, String, func
 
 from flask import Flask, render_template, jsonify
 
@@ -76,6 +76,25 @@ def precipitation(season: str):
     rs = []
     for p in ap:
         rs.append(dict({'year': p.year, 'precip': p.precipitation}))
+
+    return jsonify(rs)
+
+# Endpoint for max temps
+@app.route("/api/v1.0/maxtemp")
+def maxtemp():
+    # Create our session (link) from Python to the DB
+    session = Session(engine)
+
+    # SQLalchemy query aggregating from daily data
+    yt = session.query(DailyObs.yr, func.max(DailyObs.max_temp)).\
+        group_by(DailyObs.yr).\
+        order_by(DailyObs.yr).all()
+    session.close()
+
+    """Return a list of all yearly snowfalls"""
+    rs = []
+    for t in yt:
+        rs.append(dict({'year': t.yr, 'maxTemp': t[1]}))
 
     return jsonify(rs)
 

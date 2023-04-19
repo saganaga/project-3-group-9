@@ -4,6 +4,7 @@ const seasonColors = {
     "Summer": "orange",
     "Fall": "red"
 };
+tempUrl = `/api/v1.0/maxtemp`;
 
 function optionChanged(selectedOption){
     dataUrl = `/api/v1.0/precipitation/seasonal/${selectedOption}`;
@@ -27,6 +28,25 @@ function drawSeasonalPrecipGraph(season, seasonalPrecipData){
     }];
     // var layout = {yaxis: {autorange: 'reversed'}};
     Plotly.newPlot("season", graphConfig);
+// Create a line chart that displays the maximum of the maximum temperatures.      
+function drawMaxTempGraph(yearlyTempData){
+    var graphConfig = [{
+        type: "line",
+        x: yearlyTempData.map((d) => d.year),
+        y: yearlyTempData.map((d) => d.maxTemp),
+        // text: yearlyTempData.map((d) => `${d.year} ${d.maxTemp}degreeF`),
+        line: {
+            color: "red",
+        }
+    }]   
+    // var layout = {yaxis: {autorange: 'reversed'}};
+    Plotly.newPlot("maxtemp", graphConfig);
+};
+
 }
 
 optionChanged(d3.select("#selSeason").node().value);
+d3.json(tempUrl).then(function(data){
+    drawMaxTempGraph(data);
+});
+
