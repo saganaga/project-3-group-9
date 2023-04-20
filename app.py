@@ -92,7 +92,7 @@ def maxtemp():
         order_by(DailyObs.yr).all()
     session.close()
 
-    """Return a list of all yearly snowfalls"""
+    """Return a list of all yearly maximum temperatures"""
     rs = []
     for t in yt:
         rs.append(dict({'year': t.yr, 'maxTemp': t[1]}))

@@ -109,8 +109,6 @@ function drawSnowfallGraph(snowfallByYear){
         x: snowfallByYear.map((d) => d.year),
         y: snowfallByYear.map((d) => d.snowfall),
         marker: {
-        color: "blue",
-        size: snowfallByYear.map((d) => d.snowfall)
             color: snowfallByYear.map((d) => `hsl(240,100,${100-(100-65)*d.snowfall/100.0})`),
             size: snowfallByYear.map((d) => d.snowfall*.5)
         }
