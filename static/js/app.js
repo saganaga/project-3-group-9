@@ -18,6 +18,7 @@ function optionChanged(selectedOption){
 function drawSeasonalPrecipGraph(season, seasonalPrecipData, showRegression = false){
     var graphConfig = [{
         type: "line",
+        name: "seasonal precipitation",
         x: seasonalPrecipData.map((d) => d.year),
         y: seasonalPrecipData.map((d) => d.precip),
         text: seasonalPrecipData.map((d) => `${season} ${d.year}`),
@@ -44,15 +45,32 @@ function drawSeasonalPrecipGraph(season, seasonalPrecipData, showRegression = fa
             // 
             type: "line",
             x: [1890,2020],
+            name: "linear regression",
             y: [regressionLine(1890), regressionLine(2020)],
             // text: seasonalPrecipData.map((d) => `${season} ${d.year}`),
             line: {
-                color: "yellow",
+                color: "black",
             }
         });
     }
-    // var layout = {yaxis: {autorange: 'reversed'}};
-    Plotly.newPlot("season", graphConfig);
+    var layout = {
+        title: {
+            text: 'Twin Cities Seasonal Precipitation 1890-2019',
+            size: 24
+        },
+        yaxis: {
+            title: {
+                text: 'Inches',
+                font: {
+                    family: 'Courier New, monospace',
+                    size: 18,
+                    color: '#7f7f7f'
+                }
+            }
+        }
+    };
+
+    Plotly.newPlot("season", graphConfig, layout);
 };
 
 // Create a line chart that displays the maximum of the maximum temperatures.      
@@ -66,24 +84,58 @@ function drawMaxTempGraph(yearlyTempData){
             color: "red",
         }
     }]   
-    // var layout = {yaxis: {autorange: 'reversed'}};
-    Plotly.newPlot("maxtemp", graphConfig);
+    var layout = {
+        title: {
+            text: 'Twin Cities Maximum Temperatures 1890-2019',
+            size: 24
+        },
+        yaxis: {
+            title: {
+                text: 'Temperature (F)',
+                font: {
+                    family: 'Courier New, monospace',
+                    size: 18,
+                    color: '#7f7f7f'
+                }
+            }
+        }
+    };
+
+    Plotly.newPlot("maxtemp", graphConfig, layout);
 };
 
 // Create a line chart that displays the total snowfall.
 function drawSnowfallGraph(snowfallByYear){
     var graphConfig = [{
-        type: "line",
+        type: "scatter",
+        mode: 'markers',
         x: snowfallByYear.map((d) => d.year),
         y: snowfallByYear.map((d) => d.snowfall),
         // text: snowfallByYear.map((d) => `${season} ${d.year}`),
-        line: {
-            color: "blue",
+        marker: {
+        color: "blue",
+        size: snowfallByYear.map((d) => d.snowfall)
         }
     }]
 
-    // var layout = {yaxis: {autorange: 'reversed'}};
-    Plotly.newPlot("snowfall", graphConfig);
+    var layout = {
+        title: {
+            text: 'Twin Cities Total Snowfall 1890-2019',
+            size: 24
+        },
+        yaxis: {
+            title: {
+                text: 'Inches',
+                font: {
+                    family: 'Courier New, monospace',
+                    size: 18,
+                    color: '#7f7f7f'
+                }
+            }
+        }
+    };
+
+    Plotly.newPlot("snowfall", graphConfig, layout);
 };
 
 optionChanged(d3.select("#selSeason").node().value);

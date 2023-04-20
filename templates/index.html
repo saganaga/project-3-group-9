@@ -6,47 +6,48 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Twin Cities Climate Trends</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-</head>
-<body>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12 jumbotron text-center">
-        <h1>Twin Cities Climate Trends</h1>
-        <p>Use the interactive charts below to explore the dataset</p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-2 col-sm-2">
-        <div class="well">
-          <h5>Season:</h5>
-            <select id="selSeason" onchange="optionChanged(this.value)">
-                <option>Winter</option>
-                <option>Spring</option>
-                <option>Summer</option>
-                <option>Fall</option>
-            </select>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 jumbotron text-center">
+          <h1>Twin Cities Climate Trends</h1>
+          <p>Use the interactive charts below to explore the dataset</p>
         </div>
       </div>
-      <div class="col-md-10 col-sm-10">
-        <div id="season"></div>
+      <div class="row">
+        <div class="col-md-2 col-sm-2">
+          <div class="well">
+            <h5>Season:</h5>
+              <select id="selSeason" onchange="optionChanged(this.value)">
+                  <option>Winter</option>
+                  <option>Spring</option>
+                  <option>Summer</option>
+                  <option>Fall</option>
+              </select>
+          </div>
+        </div>
+        <div class="col-md-10 col-sm-10">
+          <div id="season"></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div id="maxtemp"></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div id="snowfall"></div>
+        </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-md-12">
-        <div id="maxtemp"></div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <div id="snowfall"></div>
-      </div>
-    </div>
-  </div>
-  <script src="/static/js/statistics.min.js" type="text/javascript"></script>
-  <script src="https://d3js.org/d3.v5.min.js"></script>
-  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-  <script src="/static/js/app.js"></script>
-</body>
-<!--Data was obtained from Minneapolis/St. Paul Climate Data - 
-  Historical Climate Data Listings: https://www.dnr.state.mn.us/climate/twin_cities/listings.html-->
+    <script src="/static/js/statistics.min.js" type="text/javascript"></script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="/static/js/app.js"></script>
+  <footer>
+    <a href="https://www.dnr.state.mn.us/climate/twin_cities/listings.html">Minneapolis/St. Paul Climate Data - Historical Climate Data Listings</a>
+  </footer>
+  </body>
 </html>
