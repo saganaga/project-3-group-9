@@ -42,12 +42,10 @@ function drawSeasonalPrecipGraph(season, seasonalPrecipData, showRegression = fa
         }
         // Add the regression line to the graph
         graphConfig.push({
-            // 
             type: "line",
             x: [1890,2020],
             name: "linear regression",
             y: [regressionLine(1890), regressionLine(2020)],
-            // text: seasonalPrecipData.map((d) => `${season} ${d.year}`),
             line: {
                 color: "black",
             }
@@ -79,7 +77,6 @@ function drawMaxTempGraph(yearlyTempData){
         type: "line",
         x: yearlyTempData.map((d) => d.year),
         y: yearlyTempData.map((d) => d.maxTemp),
-        // text: yearlyTempData.map((d) => `${d.year} ${d.maxTemp}degreeF`),
         line: {
             color: "red",
         }
@@ -111,10 +108,11 @@ function drawSnowfallGraph(snowfallByYear){
         mode: 'markers',
         x: snowfallByYear.map((d) => d.year),
         y: snowfallByYear.map((d) => d.snowfall),
-        // text: snowfallByYear.map((d) => `${season} ${d.year}`),
         marker: {
         color: "blue",
         size: snowfallByYear.map((d) => d.snowfall)
+            color: snowfallByYear.map((d) => `hsl(240,100,${100-(100-65)*d.snowfall/100.0})`),
+            size: snowfallByYear.map((d) => d.snowfall*.5)
         }
     }]
 
