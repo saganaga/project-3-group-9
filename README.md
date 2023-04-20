@@ -37,3 +37,7 @@ With the linear regression lines there is a clear trend that the Twin Cities are
 Data was obtained from Minneapolis/St. Paul Climate Data - Historical Climate Data Listings: https://www.dnr.state.mn.us/climate/twin_cities/listings.html
 DB credentials used by the Flask application must be provided via a Python module called `keys.py`. See app.py for required variable names.
 JavaScript library used (needed to be downloaded and installed): LinearRegression: https://github.com/thisancog/statistics.js
+(Website where we consulted to make our code better: https://plotly.com/javascript/figure-labels/
+https://www.chartjs.org/docs/latest/configuration/title.html)
+(Website we found our images for the PowerPoint presentation:https://www.exploreminnesota.com/article/tour-twin-cities-green-line ,
+https://science.howstuffworks.com/nature/climate-weather/atmospheric/climate-change-four-seasons-redefine.htm  )
