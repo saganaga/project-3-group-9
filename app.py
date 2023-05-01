@@ -22,7 +22,7 @@ seasons = ['Winter', 'Spring', 'Summer', 'Fall']
 Base = automap_base()
 # Views are not automapped; custom class must be declared by hand
 class SeasonalPrecip(Base):
-    __tablename__ = 'seasonal_precip'
+    __tablename__ = 'seasons_data'
     year = Column('yr', Integer, primary_key=True)
     season = Column('season', String, primary_key=True)
     precipitation = Column('total_precip', Numeric)
